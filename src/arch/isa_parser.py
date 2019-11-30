@@ -1146,7 +1146,13 @@ class InstObjParams(object):
                 else:
                     self.op_class = 'MemReadOp'
             elif 'IsFloating' in self.flags:
-                self.op_class = 'FloatAddOp'
+                # Set the class of fp mul/div ops
+                if self.class_name == 'Mmulf' or self.class_name == 'mulfp' or self.class_name == 'Mmuli' or self.class_name == 'Mmulfi':
+                   self.op_class = 'FloatMultOp'
+                elif self.class_name  == 'Mdivf' or self.class_name == 'divfp':
+                   self.op_class = 'FloatDivOp'
+                else:
+                    self.op_class = 'FloatAddOp'
             else:
                 self.op_class = 'IntAluOp'
 
