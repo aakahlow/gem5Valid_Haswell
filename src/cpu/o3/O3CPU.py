@@ -55,7 +55,7 @@ class DerivO3CPU(BaseCPU):
     cacheStorePorts = Param.Unsigned(1, "Cache Ports. "
           "Constrains stores only. Loads are constrained by load FUs.")
 
-    decodeToFetchDelay = Param.Cycles(1, "Decode to fetch delay")
+    decodeToFetchDelay = Param.Cycles(3, "Decode to fetch delay")
     renameToFetchDelay = Param.Cycles(1 ,"Rename to fetch delay")
     iewToFetchDelay = Param.Cycles(1, "Issue/Execute/Writeback to fetch "
                                    "delay")
@@ -69,7 +69,7 @@ class DerivO3CPU(BaseCPU):
     iewToDecodeDelay = Param.Cycles(1, "Issue/Execute/Writeback to decode "
                                     "delay")
     commitToDecodeDelay = Param.Cycles(1, "Commit to decode delay")
-    fetchToDecodeDelay = Param.Cycles(2, "Fetch to decode delay")
+    fetchToDecodeDelay = Param.Cycles(5, "Fetch to decode delay")
     decodeWidth = Param.Unsigned(6, "Decode width")
 
     iewToRenameDelay = Param.Cycles(1, "Issue/Execute/Writeback to rename "
@@ -82,7 +82,7 @@ class DerivO3CPU(BaseCPU):
                "Issue/Execute/Writeback delay")
     renameToIEWDelay = Param.Cycles(4, "Rename to "
                "Issue/Execute/Writeback delay")
-    issueToExecuteDelay = Param.Cycles(2, "Issue to execute delay (internal "
+    issueToExecuteDelay = Param.Cycles(1, "Issue to execute delay (internal "
               "to the IEW stage)")
     dispatchWidth = Param.Unsigned(6, "Dispatch width")
     issueWidth = Param.Unsigned(8, "Issue width")
@@ -127,8 +127,8 @@ class DerivO3CPU(BaseCPU):
         _defaultNumPhysCCRegs = Self.numPhysIntRegs * 5
     numPhysCCRegs = Param.Unsigned(_defaultNumPhysCCRegs,
                                    "Number of physical cc registers")
-    numIQEntries = Param.Unsigned(60, "Number of instruction queue entries")
-    numROBEntries = Param.Unsigned(192, "Number of reorder buffer entries")
+    numIQEntries = Param.Unsigned(69, "Number of instruction queue entries")
+    numROBEntries = Param.Unsigned(220, "Number of reorder buffer entries")
 
     smtNumFetchingThreads = Param.Unsigned(1, "SMT Number of Fetching Threads")
     smtFetchPolicy = Param.String('SingleThread', "SMT Fetch policy")

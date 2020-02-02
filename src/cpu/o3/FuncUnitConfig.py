@@ -47,32 +47,38 @@ class IntALU(FUDesc):
     opList = [ OpDesc(opClass='IntAlu') ]
     count = 4
 
-class IntMultDiv(FUDesc):
-    opList = [ OpDesc(opClass='IntMult', opLat=4),
-               OpDesc(opClass='IntDiv', opLat=20, pipelined=False) ]
+class IntMult(FUDesc):
+    opList = [ OpDesc(opClass='IntMult', opLat=3) ]
+    count=1
+
+class IntDiv(FUDesc):
+    opList = [ OpDesc(opClass='IntDiv', opLat=20, pipelined=False) ]
 
     # DIV and IDIV instructions in x86 are implemented using a loop which
     # issues division microops.  The latency of these microops should really be
     # one (or a small number) cycle each since each of these computes one bit
     # of the quotient.
     if buildEnv['TARGET_ISA'] in ('x86'):
-        opList[1].opLat=1
+        opList[0].opLat=1
 
-    count=2
+    count=1
 
 class FP_ALU(FUDesc):
     opList = [ OpDesc(opClass='FloatAdd', opLat=3),
                OpDesc(opClass='FloatCmp', opLat=3),
                OpDesc(opClass='FloatCvt', opLat=3) ]
-    count = 4
+    count = 1
 
-class FP_MultDiv(FUDesc):
+class FP_Mult(FUDesc):
     opList = [ OpDesc(opClass='FloatMult', opLat=5),
                OpDesc(opClass='FloatMultAcc', opLat=5),
-               OpDesc(opClass='FloatMisc', opLat=3),
-               OpDesc(opClass='FloatDiv', opLat=15, pipelined=False),
+               OpDesc(opClass='FloatMisc', opLat=3) ]
+    count = 1
+
+class FP_Div(FUDesc):
+    opList = [ OpDesc(opClass='FloatDiv', opLat=15, pipelined=False),
                OpDesc(opClass='FloatSqrt', opLat=15, pipelined=False) ]
-    count = 2
+    count = 1
 
 class SIMD_Unit(FUDesc):
     opList = [ OpDesc(opClass='SimdAdd', opLat=1),
