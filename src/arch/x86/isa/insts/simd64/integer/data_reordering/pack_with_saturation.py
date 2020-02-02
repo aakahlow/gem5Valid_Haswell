@@ -46,8 +46,8 @@ def macroop PACKSSDW_MMX_M {
 };
 
 def macroop PACKSSDW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     pack mmx, mmx, ufp1, ext=Signed, srcSize=4, destSize=2
 };
 
@@ -61,8 +61,8 @@ def macroop PACKSSWB_MMX_M {
 };
 
 def macroop PACKSSWB_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     pack mmx, mmx, ufp1, ext=Signed, srcSize=2, destSize=1
 };
 
@@ -76,8 +76,8 @@ def macroop PACKUSWB_MMX_M {
 };
 
 def macroop PACKUSWB_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     pack mmx, mmx, ufp1, ext=0, srcSize=2, destSize=1
 };
 '''

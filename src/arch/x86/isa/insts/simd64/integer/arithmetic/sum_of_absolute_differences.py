@@ -46,8 +46,8 @@ def macroop PSADBW_MMX_M {
 };
 
 def macroop PSADBW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     msad mmx, mmx, ufp1, srcSize=1, destSize=2
 };
 '''

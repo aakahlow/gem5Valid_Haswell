@@ -53,8 +53,8 @@ def macroop PINSRW_XMM_M_I {
 };
 
 def macroop PINSRW_XMM_P_I {
-    rdip t7
-    ld t1, seg, riprel, disp, dataSize=2
+    #rdip t7
+    ldpp t1, seg, riprel, disp, dataSize=2
     mov2fp xmml, t1, "IMMEDIATE & mask(3)", size=2, ext=1
     mov2fp xmmh, t1, "IMMEDIATE & mask(3)", size=2, ext=1
 };

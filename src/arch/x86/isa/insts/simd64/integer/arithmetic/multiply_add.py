@@ -50,9 +50,10 @@ def macroop PMADDWD_MMX_M {
 };
 
 def macroop PMADDWD_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    mmuli ufp3, mmx, ufp1, srcSize=2, destSize=4, ext = Signed + "| 0x10 | 0x20"
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    mmuli ufp3, mmx, ufp1, srcSize=2, destSize=4, ext = Signed + \
+    "| 0x10 | 0x20"
     mmuli ufp4, mmx, ufp1, srcSize=2, destSize=4, ext = Signed + "| 0x10"
     maddi mmx, ufp3, ufp4, size=4, ext=0
 };

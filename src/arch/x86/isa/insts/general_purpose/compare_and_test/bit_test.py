@@ -1,4 +1,4 @@
-# Copyright (c) 2007-2008 The Hewlett-Packard Development Company
+# Copyright (c) 2009-2008 The Hewlett-Packard Development Company
 # All rights reserved.
 #
 # The license below extends only to copyright in the software and shall
@@ -44,7 +44,7 @@ def macroop BT_R_I {
 };
 
 def macroop BT_M_I {
-    limm t1, imm, dataSize=asz
+    #limm t1, imm, dataSize=asz
     # This fudges just a tiny bit, but it's reasonable to expect the
     # microcode generation logic to have the log of the various sizes
     # floating around as well.
@@ -53,9 +53,9 @@ def macroop BT_M_I {
 };
 
 def macroop BT_P_I {
-    rdip t7
-    limm t1, imm, dataSize=asz
-    ld t1, seg, riprel, disp, dataSize=asz
+    #rdip t7
+    #limm t1, imm, dataSize=asz
+    ldpp t1, seg, riprel, disp, dataSize=asz
     sexti t0, t1, imm, flags=(CF,)
 };
 

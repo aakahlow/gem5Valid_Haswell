@@ -46,8 +46,8 @@ def macroop PAVGB_MMX_M {
 };
 
 def macroop PAVGB_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mavg mmx, mmx, ufp1, size=1, ext=0
 };
 
@@ -61,8 +61,8 @@ def macroop PAVGW_MMX_M {
 };
 
 def macroop PAVGW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mavg mmx, mmx, ufp1, size=2, ext=0
 };
 # PAVGUSB

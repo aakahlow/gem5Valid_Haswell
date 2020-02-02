@@ -46,8 +46,8 @@ def macroop PXOR_MMX_M {
 };
 
 def macroop PXOR_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mxor mmx, mmx, ufp1
 };
 '''

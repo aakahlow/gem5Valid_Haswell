@@ -101,12 +101,12 @@ namespace X86ISA
     class RegOpImm : public RegOpBase
     {
       protected:
-        const uint8_t imm8;
+        const uint64_t imm8;
 
         // Constructor
         RegOpImm(ExtMachInst _machInst,
                 const char * mnem, const char *_instMnem, uint64_t setFlags,
-                InstRegIndex _src1, uint8_t _imm8, InstRegIndex _dest,
+                InstRegIndex _src1, uint64_t _imm8, InstRegIndex _dest,
                 uint8_t _dataSize, uint16_t _ext,
                 OpClass __opClass) :
             RegOpBase(_machInst, mnem, _instMnem, setFlags,

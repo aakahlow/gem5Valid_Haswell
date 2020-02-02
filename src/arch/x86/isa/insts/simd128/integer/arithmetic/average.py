@@ -49,9 +49,9 @@ def macroop PAVGB_XMM_M {
 };
 
 def macroop PAVGB_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     mavg xmml, xmml, ufp1, size=1, ext=0
     mavg xmmh, xmmh, ufp2, size=1, ext=0
 };
@@ -69,9 +69,9 @@ def macroop PAVGUSB_XMM_M {
 };
 
 def macroop PAVGUSB_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     mavg xmml, xmml, ufp1, size=1, ext=0
     mavg xmmh, xmmh, ufp2, size=1, ext=0
 };
@@ -89,9 +89,9 @@ def macroop PAVGW_XMM_M {
 };
 
 def macroop PAVGW_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     mavg xmml, xmml, ufp1, size=2, ext=0
     mavg xmmh, xmmh, ufp2, size=2, ext=0
 };

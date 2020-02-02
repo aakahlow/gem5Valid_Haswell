@@ -46,8 +46,8 @@ def macroop PSHUFW_MMX_M_I {
 };
 
 def macroop PSHUFW_MMX_P_I {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     shuffle mmx, ufp1, ufp1, size=2, ext=imm
 };
 

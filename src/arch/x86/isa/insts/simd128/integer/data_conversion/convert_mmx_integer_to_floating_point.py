@@ -46,8 +46,8 @@ def macroop CVTPI2PS_XMM_M {
 };
 
 def macroop CVTPI2PS_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     cvti2f xmml, ufp1, size=4, ext=0
 };
 
@@ -63,8 +63,8 @@ def macroop CVTPI2PD_XMM_M {
 };
 
 def macroop CVTPI2PD_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     cvti2f xmml, ufp1, srcSize=4, destSize=8, ext=0
     cvti2f xmmh, ufp1, srcSize=4, destSize=8, ext=2
 };

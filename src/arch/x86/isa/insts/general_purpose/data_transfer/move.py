@@ -1,4 +1,4 @@
-# Copyright (c) 2007-2008 The Hewlett-Packard Development Company
+# Copyright (c) 200-2008 The Hewlett-Packard Development Company
 # All rights reserved.
 #
 # The license below extends only to copyright in the software and shall
@@ -60,8 +60,9 @@ def macroop MOV_M_R {
 };
 
 def macroop MOV_P_R {
-    rdip t7
-    st reg, seg, riprel, disp
+    #rdip t7
+    stpp reg, seg, riprel, disp
+    # stpp reg, seg, riprel
 };
 
 def macroop MOV_R_M {
@@ -69,8 +70,8 @@ def macroop MOV_R_M {
 };
 
 def macroop MOV_R_P {
-    rdip t7
-    ld reg, seg, riprel, disp
+ #   rdip t7
+    ldpp reg, seg, [1,t0,t7], disp
 };
 
 def macroop MOV_R_I {
@@ -97,14 +98,16 @@ def macroop MOVSXD_R_R {
 };
 
 def macroop MOVSXD_R_M {
-    ld t1, seg, sib, disp, dataSize=4
-    sexti reg, t1, 31
+  # ld t1, seg, sib, disp, dataSize=4
+  # sexti reg, t1, 31
+    ldsd reg, seg, sib, disp
 };
 
 def macroop MOVSXD_R_P {
-    rdip t7
-    ld t1, seg, riprel, disp, dataSize=4
-    sexti reg, t1, 31
+    #rdip t7
+    #ld t1, seg, riprel, disp, dataSize=4
+    #sexti reg, t1, 31
+    ldsdp reg, seg, riprel, disp
 };
 
 def macroop MOVSX_B_R_R {
@@ -113,14 +116,16 @@ def macroop MOVSX_B_R_R {
 };
 
 def macroop MOVSX_B_R_M {
-    ld t1, seg, sib, disp, dataSize=1
-    sexti reg, t1, 7
+    #ld t1, seg, sib, disp
+    ldsb reg, seg, sib, disp
+    #sexti reg, t1, 7
 };
 
 def macroop MOVSX_B_R_P {
-    rdip t7
-    ld t1, seg, riprel, disp, dataSize=1
-    sexti reg, t1, 7
+    #rdip t7
+    #ld t1, seg, riprel, disp, dataSize=1
+    #sexti reg, t1, 7
+    ldsbp reg, seg, riprel, disp
 };
 
 def macroop MOVSX_W_R_R {
@@ -128,14 +133,16 @@ def macroop MOVSX_W_R_R {
 };
 
 def macroop MOVSX_W_R_M {
-    ld reg, seg, sib, disp, dataSize=2
-    sexti reg, reg, 15
+    #ld reg, seg, sib, disp, dataSize=2
+    ldsw reg, seg, sib, disp
+    #sexti reg, reg, 15
 };
 
 def macroop MOVSX_W_R_P {
-    rdip t7
-    ld reg, seg, riprel, disp, dataSize=2
-    sexti reg, reg, 15
+    #rdip t7
+    #ld reg, seg, riprel, disp, dataSize=2
+    ldswp reg, seg, riprel, disp
+    #sexti reg, reg, 15
 };
 
 #
@@ -150,12 +157,14 @@ def macroop MOVZX_B_R_R {
 def macroop MOVZX_B_R_M {
     ld t1, seg, sib, disp, dataSize=1
     zexti reg, t1, 7
+    #ldzb reg, seg, sib, disp
 };
 
 def macroop MOVZX_B_R_P {
-    rdip t7
-    ld t1, seg, riprel, disp, dataSize=1
+    #rdip t7
+    ldpp t1, seg, riprel, disp, dataSize=1
     zexti reg, t1, 7
+    #ldzbp reg, seg, riprel, disp
 };
 
 def macroop MOVZX_W_R_R {
@@ -163,14 +172,16 @@ def macroop MOVZX_W_R_R {
 };
 
 def macroop MOVZX_W_R_M {
-    ld t1, seg, sib, disp, dataSize=2
-    zexti reg, t1, 15
+    #ld t1, seg, sib, disp, dataSize=2
+    #zexti reg, t1, 15
+    ldzw reg, seg, sib, disp
 };
 
 def macroop MOVZX_W_R_P {
-    rdip t7
-    ld t1, seg, riprel, disp, dataSize=2
-    zexti reg, t1, 15
+    #rdip t7
+    #ld t1, seg, riprel, disp, dataSize=2
+    ldzwp reg, seg, riprel, disp
+    #zexti reg, t1, 15
 };
 
 def macroop MOV_C_R {
@@ -375,3 +386,4 @@ def macroop MOVD_P_XMM {
 #    class MOVD(Inst):
 #       "GenFault ${new UnimpInstFault}"
 #}};
+

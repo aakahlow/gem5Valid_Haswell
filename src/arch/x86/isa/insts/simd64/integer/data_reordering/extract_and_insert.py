@@ -50,8 +50,8 @@ def macroop PINSRW_MMX_M_I {
 };
 
 def macroop PINSRW_MMX_P_I {
-    rdip t7
-    ld t1, seg, riprel, disp, dataSize=2
+    #rdip t7
+    ldpp t1, seg, riprel, disp, dataSize=2
     mov2fp mmx, t1, "IMMEDIATE & mask(2)", size=2, ext=0
 };
 '''

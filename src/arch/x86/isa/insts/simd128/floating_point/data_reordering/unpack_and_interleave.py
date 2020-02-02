@@ -48,8 +48,8 @@ def macroop UNPCKLPS_XMM_M {
 };
 
 def macroop UNPCKLPS_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     unpack xmmh, xmml, ufp1, ext=1, size=4
     unpack xmml, xmml, ufp1, ext=0, size=4
 };
@@ -63,8 +63,8 @@ def macroop UNPCKLPD_XMM_M {
 };
 
 def macroop UNPCKLPD_XMM_P {
-    rdip t7
-    ldfp xmmh, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp xmmh, seg, riprel, disp, dataSize=8
 };
 
 def macroop UNPCKHPS_XMM_XMM {

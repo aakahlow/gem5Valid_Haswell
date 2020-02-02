@@ -49,9 +49,9 @@ def macroop PSADBW_XMM_M {
 };
 
 def macroop PSADBW_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     msad xmml, xmml, ufp1, srcSize=1, destSize=2
     msad xmmh, xmmh, ufp2, srcSize=1, destSize=2
 };

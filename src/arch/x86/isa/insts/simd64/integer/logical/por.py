@@ -46,8 +46,8 @@ def macroop POR_MMX_M {
 };
 
 def macroop POR_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mor mmx, mmx, ufp1
 };
 '''

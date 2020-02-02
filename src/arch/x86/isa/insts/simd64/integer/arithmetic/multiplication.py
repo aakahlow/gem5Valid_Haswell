@@ -46,8 +46,8 @@ def macroop PMULHW_MMX_M {
 };
 
 def macroop PMULHW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mmuli mmx, mmx, ufp1, size=2, ext = Signed + "|" + MultHi
 };
 
@@ -61,8 +61,8 @@ def macroop PMULLW_MMX_M {
 };
 
 def macroop PMULLW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mmuli mmx, mmx, ufp1, size=2, ext = Signed
 };
 
@@ -76,8 +76,8 @@ def macroop PMULHRW_MMX_M {
 };
 
 def macroop PMULHRW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mmuli mmx, mmx, ufp1, size=2, ext = Signed + "| 0x4 |" + MultHi
 };
 
@@ -91,8 +91,8 @@ def macroop PMULHUW_MMX_M {
 };
 
 def macroop PMULHUW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mmuli mmx, mmx, ufp1, size=2, ext = MultHi
 };
 
@@ -106,8 +106,8 @@ def macroop PMULUDQ_MMX_M {
 };
 
 def macroop PMULUDQ_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mmuli mmx, mmx, ufp1, srcSize=4, destSize=8, ext=Scalar
 };
 '''

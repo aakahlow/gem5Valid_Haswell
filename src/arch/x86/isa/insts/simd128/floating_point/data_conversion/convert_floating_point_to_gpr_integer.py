@@ -48,8 +48,8 @@ def macroop CVTSS2SI_R_M {
 };
 
 def macroop CVTSS2SI_R_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     cvtf2i ufp1, ufp1, srcSize=4, destSize=dsz, ext = Scalar + "| 4"
     mov2int reg, ufp1, size=dsz
 };
@@ -66,8 +66,8 @@ def macroop CVTSD2SI_R_M {
 };
 
 def macroop CVTSD2SI_R_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     cvtf2i ufp1, ufp1, srcSize=8, destSize=dsz, ext = Scalar + "| 4"
     mov2int reg, ufp1, size=dsz
 };
@@ -84,8 +84,8 @@ def macroop CVTTSS2SI_R_M {
 };
 
 def macroop CVTTSS2SI_R_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     cvtf2i ufp1, ufp1, srcSize=4, destSize=dsz, ext=Scalar
     mov2int reg, ufp1, size=dsz
 };
@@ -102,8 +102,8 @@ def macroop CVTTSD2SI_R_M {
 };
 
 def macroop CVTTSD2SI_R_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     cvtf2i ufp1, ufp1, srcSize=8, destSize=dsz, ext=Scalar
     mov2int reg, ufp1, size=dsz
 };

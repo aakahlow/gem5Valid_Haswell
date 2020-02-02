@@ -49,9 +49,9 @@ def macroop PMINUB_XMM_M {
 };
 
 def macroop PMINUB_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     mmini xmml, xmml, ufp1, size=1, ext=0
     mmini xmmh, xmmh, ufp2, size=1, ext=0
 };
@@ -69,9 +69,9 @@ def macroop PMINSW_XMM_M {
 };
 
 def macroop PMINSW_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     mmini xmml, xmml, ufp1, size=2, ext=Signed
     mmini xmmh, xmmh, ufp2, size=2, ext=Signed
 };
@@ -89,9 +89,9 @@ def macroop PMAXUB_XMM_M {
 };
 
 def macroop PMAXUB_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     mmaxi xmml, xmml, ufp1, size=1, ext=0
     mmaxi xmmh, xmmh, ufp2, size=1, ext=0
 };
@@ -109,9 +109,9 @@ def macroop PMAXSW_XMM_M {
 };
 
 def macroop PMAXSW_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     mmaxi xmml, xmml, ufp1, size=2, ext=Signed
     mmaxi xmmh, xmmh, ufp2, size=2, ext=Signed
 };

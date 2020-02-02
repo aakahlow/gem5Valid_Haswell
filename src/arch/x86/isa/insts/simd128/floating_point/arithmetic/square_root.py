@@ -46,8 +46,8 @@ def macroop SQRTSS_XMM_M {
 };
 
 def macroop SQRTSS_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     msqrt xmml, ufp1, size=4, ext=Scalar
 };
 
@@ -64,9 +64,9 @@ def macroop SQRTPS_XMM_M {
 };
 
 def macroop SQRTPS_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     msqrt xmml, ufp1, size=4, ext=0
     msqrt xmmh, ufp2, size=4, ext=0
 };

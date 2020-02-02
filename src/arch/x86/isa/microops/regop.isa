@@ -122,7 +122,7 @@ def template MicroRegOpImmDeclare {{
       public:
         %(class_name)s(ExtMachInst _machInst,
                 const char * instMnem, uint64_t setFlags,
-                InstRegIndex _src1, uint8_t _imm8, InstRegIndex _dest,
+                InstRegIndex _src1, uint64_t _imm8, InstRegIndex _dest,
                 uint8_t _dataSize, uint16_t _ext);
 
         %(BasicExecDeclare)s
@@ -146,7 +146,7 @@ def template MicroRegOpConstructor {{
 def template MicroRegOpImmConstructor {{
     %(class_name)s::%(class_name)s(
             ExtMachInst machInst, const char * instMnem, uint64_t setFlags,
-            InstRegIndex _src1, uint8_t _imm8, InstRegIndex _dest,
+            InstRegIndex _src1, uint64_t _imm8, InstRegIndex _dest,
             uint8_t _dataSize, uint16_t _ext) :
         %(base_class)s(machInst, "%(mnemonic)s", instMnem, setFlags,
                 _src1, _imm8, _dest, _dataSize, _ext,
@@ -292,7 +292,7 @@ let {{
                         ("(?<!\w)spsrc2(?!\w)",
                          "int64_t spsrc2 = signedPick(SrcReg2, 1, dataSize);"),
                         ("(?<!\w)simm8(?!\w)",
-                         "int8_t simm8 = imm8;")):
+                         "int64_t simm8 = imm8;")):
                     matcher = re.compile(rex)
                     if matcher.search(all):
                         prefix += decl + "\n"
@@ -575,6 +575,62 @@ let {{
             }
         '''
 
+    class Mul1semb(WrRegOp):
+        op_class = 'IntMultOp'
+
+        code = '''
+            ProdLow = psrc1 * op2;
+            int halfSize = (dataSize * 8) / 2;
+            uint64_t shifter = (ULL(1) << halfSize);
+            uint64_t hiResult;
+            uint64_t psrc1_h = psrc1 / shifter;
+            uint64_t psrc1_l = psrc1 & mask(halfSize);
+            uint64_t psrc2_h = (op2 / shifter) & mask(halfSize);
+            uint64_t psrc2_l = op2 & mask(halfSize);
+            hiResult = ((psrc1_l * psrc2_h + psrc1_h * psrc2_l +
+                        ((psrc1_l * psrc2_l) / shifter)) /shifter) +
+                       psrc1_h * psrc2_h;
+            if (bits(psrc1, dataSize * 8 - 1))
+                hiResult -= op2;
+            if (bits(op2, dataSize * 8 - 1))
+                hiResult -= psrc1;
+            ProdHi = hiResult;
+
+            SrcReg1 = merge(SrcReg1, ProdLow, dataSize);
+
+            '''
+        big_code = '''
+            ProdLow = psrc1 * op2;
+            int halfSize = (dataSize * 8) / 2;
+            uint64_t shifter = (ULL(1) << halfSize);
+            uint64_t hiResult;
+            uint64_t psrc1_h = psrc1 / shifter;
+            uint64_t psrc1_l = psrc1 & mask(halfSize);
+            uint64_t psrc2_h = (op2 / shifter) & mask(halfSize);
+            uint64_t psrc2_l = op2 & mask(halfSize);
+            hiResult = ((psrc1_l * psrc2_h + psrc1_h * psrc2_l +
+                        ((psrc1_l * psrc2_l) / shifter)) /shifter) +
+                       psrc1_h * psrc2_h;
+            if (bits(psrc1, dataSize * 8 - 1))
+                hiResult -= op2;
+            if (bits(op2, dataSize * 8 - 1))
+                hiResult -= psrc1;
+            ProdHi = hiResult;
+            SrcReg1 = ProdLow & mask(dataSize * 8);
+
+            '''
+
+        flag_code = '''
+            if ((-ProdHi & mask(dataSize * 8)) !=
+                    bits(ProdLow, dataSize * 8 - 1)) {
+                PredcfofBits = PredcfofBits | (ext & (CFBit | OFBit));
+                PredecfBit = PredecfBit | (ext & ECFBit);
+            } else {
+                PredcfofBits = PredcfofBits & ~(ext & (CFBit | OFBit));
+                PredecfBit = PredecfBit & ~(ext & ECFBit);
+            }
+        '''
+
     class Mul1u(WrRegOp):
         op_class = 'IntMultOp'
 
@@ -590,6 +646,49 @@ let {{
                       ((psrc1_l * psrc2_l) / shifter)) / shifter) +
                      psrc1_h * psrc2_h;
             '''
+        flag_code = '''
+            if (ProdHi) {
+                PredcfofBits = PredcfofBits | (ext & (CFBit | OFBit));
+                PredecfBit = PredecfBit | (ext & ECFBit);
+            } else {
+                PredcfofBits = PredcfofBits & ~(ext & (CFBit | OFBit));
+                PredecfBit = PredecfBit & ~(ext & ECFBit);
+            }
+        '''
+
+    class Mul1uemb(WrRegOp):
+        op_class = 'IntMultOp'
+
+        code = '''
+            ProdLow = psrc1 * op2;
+            int halfSize = (dataSize * 8) / 2;
+            uint64_t shifter = (ULL(1) << halfSize);
+            uint64_t psrc1_h = psrc1 / shifter;
+            uint64_t psrc1_l = psrc1 & mask(halfSize);
+            uint64_t psrc2_h = (op2 / shifter) & mask(halfSize);
+            uint64_t psrc2_l = op2 & mask(halfSize);
+            ProdHi = ((psrc1_l * psrc2_h + psrc1_h * psrc2_l +
+                      ((psrc1_l * psrc2_l) / shifter)) / shifter) +
+                     psrc1_h * psrc2_h;
+
+            SrcReg1 = merge(SrcReg1, ProdLow, dataSize);
+            '''
+
+        big_code = '''
+            ProdLow = psrc1 * op2;
+            int halfSize = (dataSize * 8) / 2;
+            uint64_t shifter = (ULL(1) << halfSize);
+            uint64_t psrc1_h = psrc1 / shifter;
+            uint64_t psrc1_l = psrc1 & mask(halfSize);
+            uint64_t psrc2_h = (op2 / shifter) & mask(halfSize);
+            uint64_t psrc2_l = op2 & mask(halfSize);
+            ProdHi = ((psrc1_l * psrc2_h + psrc1_h * psrc2_l +
+                      ((psrc1_l * psrc2_l) / shifter)) / shifter) +
+                     psrc1_h * psrc2_h;
+
+            SrcReg1 = ProdLow & mask(dataSize * 8);
+            '''
+
         flag_code = '''
             if (ProdHi) {
                 PredcfofBits = PredcfofBits | (ext & (CFBit | OFBit));
@@ -716,6 +815,10 @@ let {{
         code = 'DestReg = merge(SrcReg1, op2, dataSize)'
         else_code = 'DestReg = DestReg;'
 
+    class Movset(CondRegOp):
+        code = 'DestReg = merge(SrcReg1, op2, dataSize)'
+        else_code = 'DestReg = merge(SrcReg1, 0x00, dataSize);'
+
     # Shift instructions
 
     class Sll(RegOp):
@@ -807,6 +910,73 @@ let {{
                 PredccFlagBits = newFlags & ccFlagMask;
             }
         '''
+
+    class Bsrop(RegOp):
+        code = '''
+            uint64_t v = op2;
+            uint64_t result = 0;
+
+            while (v >>= 1){
+
+               result++;
+            }
+
+            DestReg = result;
+            '''
+        big_code = '''
+            uint64_t v = op2;
+            uint64_t result = 0;
+
+            while (v >>= 1){
+
+               result++;
+            }
+
+            DestReg = result;
+            '''
+        flag_code = '''
+            if (result != 0)
+                PredezfBit = PredezfBit | (ext & EZFBit);
+            else
+                PredezfBit = PredezfBit & ~(ext & EZFBit);
+        '''
+
+    class Bsfop(RegOp):
+        code = '''
+            uint64_t v = op2;
+            uint64_t result = 0;
+
+            if(v != 0){
+            while (!(v & 1)){
+               v >>= 1;
+               ++result;
+            }
+            }
+
+
+            DestReg = result;
+            '''
+        big_code = '''
+            uint64_t v = op2;
+            uint64_t result = 0;
+
+            if(v != 0){
+            while (!(v & 1)){
+               v >>= 1;
+               ++result;
+            }
+            }
+
+            DestReg = result;
+            '''
+        flag_code = '''
+            if (result != 0)
+                PredezfBit = PredezfBit | (ext & EZFBit);
+            else
+                PredezfBit = PredezfBit & ~(ext & EZFBit);
+        '''
+
+
 
     class Sra(RegOp):
         # Because what happens to the bits shift -in- on a right shift
@@ -1170,6 +1340,19 @@ let {{
 
     class Wrip(WrRegOp, CondRegOp):
         code = 'NRIP = psrc1 + sop2 + CSBase;'
+        else_code = "NRIP = NRIP;"
+
+    class Wripcall(WrRegOp, CondRegOp):
+        code = 'NRIP = (NRIP-CSBase) + psrc1 + CSBase;'
+        else_code = "NRIP = NRIP;"
+
+    class Wripcall2(WrRegOp, CondRegOp):
+        code = 'NRIP = (NRIP-CSBase) + sop2 + CSBase;'
+        else_code = "NRIP = NRIP;"
+
+
+    class Wripcal(WrRegOp, CondRegOp):
+        code = 'NRIP = (NRIP-CSBase) + sop2 + CSBase;'
         else_code = "NRIP = NRIP;"
 
     class Wruflags(WrRegOp):

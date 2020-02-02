@@ -46,8 +46,8 @@ def macroop PADDB_MMX_M {
 };
 
 def macroop PADDB_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     maddi mmx, mmx, ufp1, size=1, ext=0
 };
 
@@ -61,8 +61,8 @@ def macroop PADDW_MMX_M {
 };
 
 def macroop PADDW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     maddi mmx, mmx, ufp1, size=2, ext=0
 };
 
@@ -76,8 +76,8 @@ def macroop PADDD_MMX_M {
 };
 
 def macroop PADDD_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     maddi mmx, mmx, ufp1, size=4, ext=0
 };
 
@@ -91,8 +91,8 @@ def macroop PADDQ_MMX_M {
 };
 
 def macroop PADDQ_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     maddi mmx, mmx, ufp1, size=8, ext=0
 };
 
@@ -106,8 +106,8 @@ def macroop PADDSB_MMX_M {
 };
 
 def macroop PADDSB_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     maddi mmx, mmx, ufp1, size=1, ext = "2 |" + Signed
 };
 
@@ -121,8 +121,8 @@ def macroop PADDSW_MMX_M {
 };
 
 def macroop PADDSW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     maddi mmx, mmx, ufp1, size=2, ext = "2 |" + Signed
 };
 
@@ -136,8 +136,8 @@ def macroop PADDUSB_MMX_M {
 };
 
 def macroop PADDUSB_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     maddi mmx, mmx, ufp1, size=1, ext=2
 };
 
@@ -151,8 +151,8 @@ def macroop PADDUSW_MMX_M {
 };
 
 def macroop PADDUSW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     maddi mmx, mmx, ufp1, size=2, ext=2
 };
 '''

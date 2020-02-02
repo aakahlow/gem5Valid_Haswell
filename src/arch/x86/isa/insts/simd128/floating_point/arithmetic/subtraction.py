@@ -46,8 +46,8 @@ def macroop SUBSS_XMM_M {
 };
 
 def macroop SUBSS_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     msubf xmml, xmml, ufp1, size=4, ext=Scalar
 };
 
@@ -61,8 +61,8 @@ def macroop SUBSD_XMM_M {
 };
 
 def macroop SUBSD_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     msubf xmml, xmml, ufp1, size=8, ext=Scalar
 };
 

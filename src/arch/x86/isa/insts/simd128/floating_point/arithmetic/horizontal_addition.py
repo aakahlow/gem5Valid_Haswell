@@ -87,9 +87,9 @@ def macroop HADDPD_XMM_M {
 };
 
 def macroop HADDPD_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT+8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT+8", dataSize=8
     maddf xmml, xmmh, xmml, size=8, ext=Scalar
     maddf xmmh, ufp1, ufp2, size=8, ext=Scalar
 };

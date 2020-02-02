@@ -101,7 +101,7 @@ namespace X86ISA
         printDestReg(response, 0, dataSize);
         response << ", ";
         printSrcReg(response, 0, dataSize);
-        ccprintf(response, ", %#x", imm8);
+        ccprintf(response, ", %#lx", imm8);
         return response.str();
     }
 }

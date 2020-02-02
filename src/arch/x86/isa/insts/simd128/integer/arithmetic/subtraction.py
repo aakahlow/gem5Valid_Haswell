@@ -49,9 +49,9 @@ def macroop PSUBB_XMM_M {
 };
 
 def macroop PSUBB_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     msubi xmml, xmml, ufp1, size=1, ext=0
     msubi xmmh, xmmh, ufp2, size=1, ext=0
 };
@@ -69,9 +69,9 @@ def macroop PSUBW_XMM_M {
 };
 
 def macroop PSUBW_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     msubi xmml, xmml, ufp1, size=2, ext=0
     msubi xmmh, xmmh, ufp2, size=2, ext=0
 };
@@ -89,9 +89,9 @@ def macroop PSUBD_XMM_M {
 };
 
 def macroop PSUBD_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     msubi xmml, xmml, ufp1, size=4, ext=0
     msubi xmmh, xmmh, ufp2, size=4, ext=0
 };
@@ -109,9 +109,9 @@ def macroop PSUBQ_XMM_M {
 };
 
 def macroop PSUBQ_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     msubi xmml, xmml, ufp1, size=8, ext=0
     msubi xmmh, xmmh, ufp2, size=8, ext=0
 };
@@ -129,9 +129,9 @@ def macroop PSUBSB_XMM_M {
 };
 
 def macroop PSUBSB_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     msubi xmml, xmml, ufp1, size=1, ext = "2 |" + Signed
     msubi xmmh, xmmh, ufp2, size=1, ext = "2 |" + Signed
 };
@@ -149,9 +149,9 @@ def macroop PSUBSW_XMM_M {
 };
 
 def macroop PSUBSW_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     msubi xmml, xmml, ufp1, size=2, ext = "2 |" + Signed
     msubi xmmh, xmmh, ufp2, size=2, ext = "2 |" + Signed
 };
@@ -169,9 +169,9 @@ def macroop PSUBUSB_XMM_M {
 };
 
 def macroop PSUBUSB_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     msubi xmml, xmml, ufp1, size=1, ext=2
     msubi xmmh, xmmh, ufp2, size=1, ext=2
 };
@@ -189,9 +189,9 @@ def macroop PSUBUSW_XMM_M {
 };
 
 def macroop PSUBUSW_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     msubi xmml, xmml, ufp1, size=2, ext=2
     msubi xmmh, xmmh, ufp2, size=2, ext=2
 };

@@ -47,8 +47,8 @@ def macroop CVTSI2SS_XMM_M {
 };
 
 def macroop CVTSI2SS_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     cvti2f xmml, ufp1, srcSize=dsz, destSize=4, ext=Scalar
 };
 
@@ -63,8 +63,8 @@ def macroop CVTSI2SD_XMM_M {
 };
 
 def macroop CVTSI2SD_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     cvti2f xmml, ufp1, srcSize=dsz, destSize=8, ext=Scalar
 };
 '''

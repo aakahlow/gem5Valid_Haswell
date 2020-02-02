@@ -43,19 +43,19 @@ def macroop OR_R_R
 
 def macroop OR_M_I
 {
-    limm t2, imm
+    #limm t2, imm
     ldst t1, seg, sib, disp
-    or t1, t1, t2, flags=(OF,SF,ZF,PF,CF)
+    ori t1, t1, imm, flags=(OF,SF,ZF,PF,CF)
     st t1, seg, sib, disp
 };
 
 def macroop OR_P_I
 {
-    limm t2, imm
-    rdip t7
-    ldst t1, seg, riprel, disp
-    or t1, t1, t2, flags=(OF,SF,ZF,PF,CF)
-    st t1, seg, riprel, disp
+    #limm t2, imm
+    #rdip t7
+    ldstpp t1, seg, riprel, disp
+    ori t1, t1, imm, flags=(OF,SF,ZF,PF,CF)
+    stpp t1, seg, riprel, disp
 };
 
 def macroop OR_LOCKED_M_I
@@ -88,8 +88,8 @@ def macroop OR_M_R
 
 def macroop OR_P_R
 {
-    rdip t7
-    ldst t1, seg, riprel, disp
+    #rdip t7
+    ldstpp t1, seg, riprel, disp
     or t1, t1, reg, flags=(OF,SF,ZF,PF,CF)
     st t1, seg, riprel, disp
 };
@@ -121,15 +121,15 @@ def macroop OR_R_M
 
 def macroop OR_R_P
 {
-    rdip t7
-    ld t1, seg, riprel, disp
+    #rdip t7
+    ldpp t1, seg, riprel, disp
     or reg, reg, t1, flags=(OF,SF,ZF,PF,CF)
 };
 
 def macroop OR_R_I
 {
-    limm t1, imm
-    or reg, reg, t1, flags=(OF,SF,ZF,PF,CF)
+    #limm t1, imm
+    ori reg, reg, imm, flags=(OF,SF,ZF,PF,CF)
 };
 
 def macroop XOR_R_R
@@ -139,25 +139,25 @@ def macroop XOR_R_R
 
 def macroop XOR_R_I
 {
-    limm t1, imm
-    xor reg, reg, t1, flags=(OF,SF,ZF,PF,CF)
+    #limm t1, imm
+    xori reg, reg, imm, flags=(OF,SF,ZF,PF,CF)
 };
 
 def macroop XOR_M_I
 {
-    limm t2, imm
+    #limm t2, imm
     ldst t1, seg, sib, disp
-    xor t1, t1, t2, flags=(OF,SF,ZF,PF,CF)
+    xori t1, t1, imm, flags=(OF,SF,ZF,PF,CF)
     st t1, seg, sib, disp
 };
 
 def macroop XOR_P_I
 {
-    limm t2, imm
-    rdip t7
-    ldst t1, seg, riprel, disp
-    xor t1, t1, t2, flags=(OF,SF,ZF,PF,CF)
-    st t1, seg, riprel, disp
+    #limm t2, imm
+    #rdip t7
+    ldstpp t1, seg, riprel, disp
+    xori t1, t1, imm, flags=(OF,SF,ZF,PF,CF)
+    stpp t1, seg, riprel, disp
 };
 
 def macroop XOR_LOCKED_M_I
@@ -190,8 +190,8 @@ def macroop XOR_M_R
 
 def macroop XOR_P_R
 {
-    rdip t7
-    ldst t1, seg, riprel, disp
+    #rdip t7
+    ldstpp t1, seg, riprel, disp
     xor t1, t1, reg, flags=(OF,SF,ZF,PF,CF)
     st t1, seg, riprel, disp
 };
@@ -223,8 +223,8 @@ def macroop XOR_R_M
 
 def macroop XOR_R_P
 {
-    rdip t7
-    ld t1, seg, riprel, disp
+    #rdip t7
+    ldpp t1, seg, riprel, disp
     xor reg, reg, t1, flags=(OF,SF,ZF,PF,CF)
 };
 
@@ -241,32 +241,32 @@ def macroop AND_R_M
 
 def macroop AND_R_P
 {
-    rdip t7
-    ld t1, seg, riprel, disp
+    #rdip t7
+    ldpp t1, seg, riprel, disp
     and reg, reg, t1, flags=(OF,SF,ZF,PF,CF)
 };
 
 def macroop AND_R_I
 {
-    limm t1, imm
-    and reg, reg, t1, flags=(OF,SF,ZF,PF,CF)
+    #limm t1, imm
+    andi reg, reg, imm, flags=(OF,SF,ZF,PF,CF)
 };
 
 def macroop AND_M_I
 {
     ldst t2, seg, sib, disp
-    limm t1, imm
-    and t2, t2, t1, flags=(OF,SF,ZF,PF,CF)
+    #limm t1, imm
+    andi t2, t2, imm, flags=(OF,SF,ZF,PF,CF)
     st t2, seg, sib, disp
 };
 
 def macroop AND_P_I
 {
-    rdip t7
-    ldst t2, seg, riprel, disp
-    limm t1, imm
-    and t2, t2, t1, flags=(OF,SF,ZF,PF,CF)
-    st t2, seg, riprel, disp
+    #rdip t7
+    ldstpp t2, seg, riprel, disp
+    #limm t1, imm
+    andi t2, t2, imm, flags=(OF,SF,ZF,PF,CF)
+    stpp t2, seg, riprel, disp
 };
 
 def macroop AND_LOCKED_M_I
@@ -299,10 +299,10 @@ def macroop AND_M_R
 
 def macroop AND_P_R
 {
-    rdip t7
-    ldst t1, seg, riprel, disp
+    #rdip t7
+    ldstpp t1, seg, riprel, disp
     and t1, t1, reg, flags=(OF,SF,ZF,PF,CF)
-    st t1, seg, riprel, disp
+    stpp t1, seg, riprel, disp
 };
 
 def macroop AND_LOCKED_M_R
@@ -326,25 +326,25 @@ def macroop AND_LOCKED_P_R
 
 def macroop NOT_R
 {
-    limm t1, -1
-    xor reg, reg, t1
+    #limm t1, -1
+    xori reg, reg, -1
 };
 
 def macroop NOT_M
 {
-    limm t1, -1
+    #limm t1, -1
     ldst t2, seg, sib, disp
-    xor t2, t2, t1
+    xori t2, t2, -1
     st t2, seg, sib, disp
 };
 
 def macroop NOT_P
 {
-    limm t1, -1
-    rdip t7
-    ldst t2, seg, riprel, disp
-    xor t2, t2, t1
-    st t2, seg, riprel, disp
+    #limm t1, -1
+    #rdip t7
+    ldstpp t2, seg, riprel, disp
+    xori t2, t2, -1
+    stpp t2, seg, riprel, disp
 };
 
 def macroop NOT_LOCKED_M
@@ -368,3 +368,4 @@ def macroop NOT_LOCKED_P
     mfence
 };
 '''
+

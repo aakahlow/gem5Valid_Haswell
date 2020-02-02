@@ -50,9 +50,9 @@ def macroop SHUFPS_XMM_M_I {
 };
 
 def macroop SHUFPS_XMM_P_I {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     shuffle xmml, xmml, xmmh, size=4, ext="IMMEDIATE"
     shuffle xmmh, ufp1, ufp2, size=4, ext="IMMEDIATE >> 4"
 };
@@ -71,9 +71,9 @@ def macroop SHUFPD_XMM_M_I {
 };
 
 def macroop SHUFPD_XMM_P_I {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     shuffle xmml, xmml, xmmh, size=8, ext="IMMEDIATE"
     shuffle xmmh, ufp1, ufp2, size=8, ext="IMMEDIATE >> 1"
 };

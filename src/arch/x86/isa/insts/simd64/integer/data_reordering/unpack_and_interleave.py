@@ -46,8 +46,8 @@ def macroop PUNPCKLBW_MMX_M {
 };
 
 def macroop PUNPCKLBW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     unpack mmx, mmx, ufp1, ext=0, size=1
 };
 
@@ -61,8 +61,8 @@ def macroop PUNPCKLWD_MMX_M {
 };
 
 def macroop PUNPCKLWD_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     unpack mmx, mmx, ufp1, ext=0, size=2
 };
 
@@ -76,8 +76,8 @@ def macroop PUNPCKLDQ_MMX_M {
 };
 
 def macroop PUNPCKLDQ_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     unpack mmx, mmx, ufp1, ext=0, size=4
 };
 
@@ -91,8 +91,8 @@ def macroop PUNPCKHBW_MMX_M {
 };
 
 def macroop PUNPCKHBW_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     unpack mmx, mmx, ufp1, ext=1, size=1
 };
 
@@ -106,8 +106,8 @@ def macroop PUNPCKHWD_MMX_M {
 };
 
 def macroop PUNPCKHWD_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     unpack mmx, mmx, ufp1, ext=1, size=2
 };
 
@@ -121,8 +121,8 @@ def macroop PUNPCKHDQ_MMX_M {
 };
 
 def macroop PUNPCKHDQ_MMX_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     unpack mmx, mmx, ufp1, ext=1, size=4
 };
 '''

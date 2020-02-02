@@ -49,9 +49,9 @@ def macroop CVTPS2DQ_XMM_M {
 };
 
 def macroop CVTPS2DQ_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     cvtf2i xmml, ufp1, size=4, ext=4
     cvtf2i xmmh, ufp2, size=4, ext=4
 };
@@ -71,9 +71,9 @@ def macroop CVTPD2DQ_XMM_M {
 };
 
 def macroop CVTPD2DQ_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     cvtf2i xmml, ufp1, srcSize=8, destSize=4, ext=4
     cvtf2i xmml, ufp2, srcSize=8, destSize=4, ext=(4 | 2)
     lfpimm xmmh, 0
@@ -114,9 +114,9 @@ def macroop CVTTPD2DQ_XMM_M {
 };
 
 def macroop CVTTPD2DQ_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
-    ldfp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, "DISPLACEMENT", dataSize=8
+    ldfppp ufp2, seg, riprel, "DISPLACEMENT + 8", dataSize=8
     cvtf2i xmml, ufp1, srcSize=8, destSize=4, ext=0
     cvtf2i xmml, ufp2, srcSize=8, destSize=4, ext=2
     lfpimm xmmh, 0

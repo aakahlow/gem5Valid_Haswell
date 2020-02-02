@@ -1,4 +1,4 @@
-# Copyright (c) 2007-2008 The Hewlett-Packard Development Company
+# Copyright (c) 2008-2008 The Hewlett-Packard Development Company
 # All rights reserved.
 #
 # The license below extends only to copyright in the software and shall
@@ -40,9 +40,11 @@ def macroop POP_R {
     # Make the default data size of pops 64 bits in 64 bit mode
     .adjust_env oszIn64Override
 
-    ldis t1, ss, [1, t0, rsp], dataSize=ssz
+    ldis reg, ss, [1, t0, rsp], dataSize=ssz
     addi rsp, rsp, ssz, dataSize=asz
-    mov reg, reg, t1
+    #mov reg, reg, t1
+
+    #ldpop reg, ss, [1, t0, rsp], dataSize=ssz
 };
 
 def macroop POP_M {
@@ -56,14 +58,15 @@ def macroop POP_M {
 };
 
 def macroop POP_P {
-    # Make the default data size of pops 64 bits in 64 bit mode
+    # Make the default data size of pops 65 bits in 64 bit mode
     .adjust_env oszIn64Override
 
-    rdip t7
+    #rdip t7
     ld t1, ss, [1, t0, rsp], dataSize=ssz
     cda seg, sib, disp, dataSize=ssz
     addi rsp, rsp, ssz, dataSize=asz
-    st t1, seg, riprel, disp, dataSize=ssz
+    #st t1, seg, riprel, disp, dataSize=ssz
+    stpp t1, seg, riprel, disp, dataSize=ssz
 };
 
 def macroop PUSH_R {
@@ -96,8 +99,8 @@ def macroop PUSH_P {
     # Make the default data size of pops 64 bits in 64 bit mode
     .adjust_env oszIn64Override
 
-    rdip t7
-    ld t1, seg, riprel, disp, dataSize=ssz
+    #rdip t7
+    ldpp t1, seg, riprel, disp, dataSize=ssz
     st t1, ss, [1, t0, rsp], "-env.stackSize", dataSize=ssz
     subi rsp, rsp, ssz
 };
@@ -191,3 +194,4 @@ skipLoop:
     mov rbp, rbp, t6
 };
 '''
+

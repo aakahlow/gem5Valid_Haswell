@@ -46,8 +46,8 @@ def macroop UCOMISS_XMM_M {
 };
 
 def macroop UCOMISS_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mcmpf2rf xmml, ufp1, size=4
 };
 
@@ -61,8 +61,8 @@ def macroop UCOMISD_XMM_M {
 };
 
 def macroop UCOMISD_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mcmpf2rf xmml, ufp1, size=8
 };
 
@@ -76,8 +76,8 @@ def macroop COMISS_XMM_M {
 };
 
 def macroop COMISS_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mcmpf2rf xmml, ufp1, size=4
 };
 
@@ -91,8 +91,8 @@ def macroop COMISD_XMM_M {
 };
 
 def macroop COMISD_XMM_P {
-    rdip t7
-    ldfp ufp1, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp ufp1, seg, riprel, disp, dataSize=8
     mcmpf2rf xmml, ufp1, size=8
 };
 '''

@@ -1,4 +1,4 @@
-# Copyright (c) 2007 The Hewlett-Packard Development Company
+# Copyright (c) 2011 The Hewlett-Packard Development Company
 # All rights reserved.
 #
 # The license below extends only to copyright in the software and shall
@@ -43,8 +43,9 @@ def macroop ADD_R_R
 
 def macroop ADD_R_I
 {
-    limm t1, imm
-    add reg, reg, t1, flags=(OF,SF,ZF,AF,PF,CF)
+    #limm t1, imm
+    addi reg, reg, imm, flags=(OF,SF,ZF,AF,PF,CF)
+    #addxyi reg, reg, imm, flags=(OF,SF,ZF,AF,PF,CF)
 };
 
 def macroop ADD_M_I
@@ -57,11 +58,11 @@ def macroop ADD_M_I
 
 def macroop ADD_P_I
 {
-    rdip t7
+    #rdip t7
     limm t2, imm
-    ldst t1, seg, riprel, disp
+    ldstpp t1, seg, riprel, disp
     add t1, t1, t2, flags=(OF,SF,ZF,AF,PF,CF)
-    st t1, seg, riprel, disp
+    stpp t1, seg, riprel, disp
 };
 
 def macroop ADD_LOCKED_M_I
@@ -94,10 +95,10 @@ def macroop ADD_M_R
 
 def macroop ADD_P_R
 {
-    rdip t7
-    ldst t1, seg, riprel, disp
+    #rdip t7
+    ldstpp t1, seg, riprel, disp
     add t1, t1, reg, flags=(OF,SF,ZF,AF,PF,CF)
-    st t1, seg, riprel, disp
+    stpp t1, seg, riprel, disp
 };
 
 def macroop ADD_LOCKED_M_R
@@ -127,8 +128,8 @@ def macroop ADD_R_M
 
 def macroop ADD_R_P
 {
-    rdip t7
-    ld t1, seg, riprel, disp
+    #rdip t7
+    ldpp t1, seg, riprel, disp
     add reg, reg, t1, flags=(OF,SF,ZF,AF,PF,CF)
 };
 
@@ -139,8 +140,8 @@ def macroop SUB_R_R
 
 def macroop SUB_R_I
 {
-    limm t1, imm
-    sub reg, reg, t1, flags=(OF,SF,ZF,AF,PF,CF)
+    #limm t1, imm
+    subi reg, reg, imm, flags=(OF,SF,ZF,AF,PF,CF)
 };
 
 def macroop SUB_R_M
@@ -151,8 +152,8 @@ def macroop SUB_R_M
 
 def macroop SUB_R_P
 {
-    rdip t7
-    ld t1, seg, riprel, disp
+    #rdip t7
+    ldpp t1, seg, riprel, disp
     sub reg, reg, t1, flags=(OF,SF,ZF,AF,PF,CF)
 };
 
@@ -166,11 +167,11 @@ def macroop SUB_M_I
 
 def macroop SUB_P_I
 {
-    rdip t7
+    #rdip t7
     limm t2, imm
-    ldst t1, seg, riprel, disp
+    ldstpp t1, seg, riprel, disp
     sub t1, t1, t2, flags=(OF,SF,ZF,AF,PF,CF)
-    st t1, seg, riprel, disp
+    stpp t1, seg, riprel, disp
 };
 
 def macroop SUB_LOCKED_M_I
@@ -203,10 +204,10 @@ def macroop SUB_M_R
 
 def macroop SUB_P_R
 {
-    rdip t7
-    ldst t1, seg, riprel, disp
+    #rdip t7
+    ldstpp t1, seg, riprel, disp
     sub t1, t1, reg, flags=(OF,SF,ZF,AF,PF,CF)
-    st t1, seg, riprel, disp
+    stpp t1, seg, riprel, disp
 };
 
 def macroop SUB_LOCKED_M_R
@@ -235,8 +236,8 @@ def macroop ADC_R_R
 
 def macroop ADC_R_I
 {
-    limm t1, imm
-    adc reg, reg, t1, flags=(OF,SF,ZF,AF,PF,CF)
+    #limm t1, imm
+    adci reg, reg, imm, flags=(OF,SF,ZF,AF,PF,CF)
 };
 
 def macroop ADC_M_I

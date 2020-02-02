@@ -47,8 +47,8 @@ def macroop MOVDDUP_XMM_M {
 };
 
 def macroop MOVDDUP_XMM_P {
-    rdip t7
-    ldfp xmml, seg, riprel, disp, dataSize=8
+    #rdip t7
+    ldfppp xmml, seg, riprel, disp, dataSize=8
     movfp xmmh, xmml, dataSize=8
 };
 
