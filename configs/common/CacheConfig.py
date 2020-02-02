@@ -60,12 +60,12 @@ def config_cache(options, system):
             print "arm_detailed is unavailable. Did you compile the O3 model?"
             sys.exit(1)
 
-        dcache_class, icache_class, l2_cache_class, walk_cache_class = \
+        dcache_class, icache_class, l2_cache_class, walk_cache_class, l3_cache_class = \
             O3_ARM_v7a_DCache, O3_ARM_v7a_ICache, O3_ARM_v7aL2, \
             O3_ARM_v7aWalkCache
     else:
-        dcache_class, icache_class, l2_cache_class, walk_cache_class = \
-            L1_DCache, L1_ICache, L2Cache, None
+        dcache_class, icache_class, l2_cache_class, l3_cache_class, walk_cache_class = \
+            L1_DCache, L1_ICache, L2Cache, L3Cache, None
 
         if buildEnv['TARGET_ISA'] == 'x86':
             walk_cache_class = PageTableWalkerCache
@@ -80,6 +80,16 @@ def config_cache(options, system):
     if options.l2cache and options.elastic_trace_en:
         fatal("When elastic trace is enabled, do not configure L2 caches.")
 
+    if options.l3cache:
+        system.l3 = L3Cache(size = options.l3_size, assoc = \
+		options.l3_assoc)
+        system.tol3bus = SystemXBar(clk_domain = system.cpu_clk_domain,
+                                      width = 32)
+        system.l3.cpu_side = system.tol3bus.master
+        system.l3.mem_side = system.membus.slave
+
+
+
     if options.l2cache:
         # Provide a clock for the L2 and the L1-to-L2 bus here as they
         # are not connected using addTwoLevelCacheHierarchy. Use the
@@ -90,7 +100,7 @@ def config_cache(options, system):
 
         system.tol2bus = L2XBar(clk_domain = system.cpu_clk_domain)
         system.l2.cpu_side = system.tol2bus.master
-        system.l2.mem_side = system.membus.slave
+        system.l2.mem_side = system.tol3bus.slave
 
     if options.memchecker:
         system.memchecker = MemChecker()

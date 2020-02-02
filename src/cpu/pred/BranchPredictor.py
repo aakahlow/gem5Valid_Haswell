@@ -38,14 +38,14 @@ class BranchPredictor(SimObject):
 
     numThreads = Param.Unsigned(1, "Number of threads")
     BTBEntries = Param.Unsigned(4096, "Number of BTB entries")
-    BTBTagSize = Param.Unsigned(16, "Size of the BTB tags, in bits")
+    BTBTagSize = Param.Unsigned(18, "Size of the BTB tags, in bits")
     RASSize = Param.Unsigned(16, "RAS size")
     instShiftAmt = Param.Unsigned(2, "Number of bits to shift instructions by")
 
-    useIndirect = Param.Bool(True, "Use indirect branch predictor")
-    indirectHashGHR = Param.Bool(True, "Hash branch predictor GHR")
-    indirectHashTargets = Param.Bool(True, "Hash path history targets")
-    indirectSets = Param.Unsigned(256, "Cache sets for indirect predictor")
+    useIndirect = Param.Bool(False, "Use indirect branch predictor")
+    indirectHashGHR = Param.Bool(False, "Hash branch predictor GHR")
+    indirectHashTargets = Param.Bool(False, "Hash path history targets")
+    indirectSets = Param.Unsigned(128, "Cache sets for indirect predictor")
     indirectWays = Param.Unsigned(2, "Ways for indirect predictor")
     indirectTagSize = Param.Unsigned(16, "Indirect target cache tag bits")
     indirectPathLength = Param.Unsigned(3,
@@ -58,7 +58,7 @@ class LocalBP(BranchPredictor):
     cxx_class = 'LocalBP'
     cxx_header = "cpu/pred/2bit_local.hh"
 
-    localPredictorSize = Param.Unsigned(2048, "Size of local predictor")
+    localPredictorSize = Param.Unsigned(4096, "Size of local predictor")
     localCtrBits = Param.Unsigned(2, "Bits per counter")
 
 
@@ -70,9 +70,9 @@ class TournamentBP(BranchPredictor):
     localPredictorSize = Param.Unsigned(2048, "Size of local predictor")
     localCtrBits = Param.Unsigned(2, "Bits per counter")
     localHistoryTableSize = Param.Unsigned(2048, "size of local history table")
-    globalPredictorSize = Param.Unsigned(8192, "Size of global predictor")
+    globalPredictorSize = Param.Unsigned(4096, "Size of global predictor")
     globalCtrBits = Param.Unsigned(2, "Bits per counter")
-    choicePredictorSize = Param.Unsigned(8192, "Size of choice predictor")
+    choicePredictorSize = Param.Unsigned(4096, "Size of choice predictor")
     choiceCtrBits = Param.Unsigned(2, "Bits of choice counters")
 
 

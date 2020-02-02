@@ -52,7 +52,7 @@ class DerivO3CPU(BaseCPU):
 
     activity = Param.Unsigned(0, "Initial count")
 
-    cacheStorePorts = Param.Unsigned(200, "Cache Ports. "
+    cacheStorePorts = Param.Unsigned(1, "Cache Ports. "
           "Constrains stores only. Loads are constrained by load FUs.")
 
     decodeToFetchDelay = Param.Cycles(1, "Decode to fetch delay")
@@ -61,35 +61,35 @@ class DerivO3CPU(BaseCPU):
                                    "delay")
     commitToFetchDelay = Param.Cycles(1, "Commit to fetch delay")
     fetchWidth = Param.Unsigned(8, "Fetch width")
-    fetchBufferSize = Param.Unsigned(64, "Fetch buffer size in bytes")
-    fetchQueueSize = Param.Unsigned(32, "Fetch queue size in micro-ops "
+    fetchBufferSize = Param.Unsigned(16, "Fetch buffer size in bytes")
+    fetchQueueSize = Param.Unsigned(56, "Fetch queue size in micro-ops "
                                     "per-thread")
 
     renameToDecodeDelay = Param.Cycles(1, "Rename to decode delay")
     iewToDecodeDelay = Param.Cycles(1, "Issue/Execute/Writeback to decode "
                                     "delay")
     commitToDecodeDelay = Param.Cycles(1, "Commit to decode delay")
-    fetchToDecodeDelay = Param.Cycles(1, "Fetch to decode delay")
-    decodeWidth = Param.Unsigned(8, "Decode width")
+    fetchToDecodeDelay = Param.Cycles(2, "Fetch to decode delay")
+    decodeWidth = Param.Unsigned(6, "Decode width")
 
     iewToRenameDelay = Param.Cycles(1, "Issue/Execute/Writeback to rename "
                                     "delay")
     commitToRenameDelay = Param.Cycles(1, "Commit to rename delay")
-    decodeToRenameDelay = Param.Cycles(1, "Decode to rename delay")
-    renameWidth = Param.Unsigned(8, "Rename width")
+    decodeToRenameDelay = Param.Cycles(3, "Decode to rename delay")
+    renameWidth = Param.Unsigned(6, "Rename width")
 
     commitToIEWDelay = Param.Cycles(1, "Commit to "
                "Issue/Execute/Writeback delay")
-    renameToIEWDelay = Param.Cycles(2, "Rename to "
+    renameToIEWDelay = Param.Cycles(4, "Rename to "
                "Issue/Execute/Writeback delay")
-    issueToExecuteDelay = Param.Cycles(1, "Issue to execute delay (internal "
+    issueToExecuteDelay = Param.Cycles(2, "Issue to execute delay (internal "
               "to the IEW stage)")
-    dispatchWidth = Param.Unsigned(8, "Dispatch width")
+    dispatchWidth = Param.Unsigned(6, "Dispatch width")
     issueWidth = Param.Unsigned(8, "Issue width")
     wbWidth = Param.Unsigned(8, "Writeback width")
     fuPool = Param.FUPool(DefaultFUPool(), "Functional Unit pool")
 
-    iewToCommitDelay = Param.Cycles(1, "Issue/Execute/Writeback to commit "
+    iewToCommitDelay = Param.Cycles(4, "Issue/Execute/Writeback to commit "
                "delay")
     renameToROBDelay = Param.Cycles(1, "Rename to reorder buffer delay")
     commitWidth = Param.Unsigned(8, "Commit width")
@@ -97,11 +97,11 @@ class DerivO3CPU(BaseCPU):
     trapLatency = Param.Cycles(13, "Trap latency")
     fetchTrapLatency = Param.Cycles(1, "Fetch trap latency")
 
-    backComSize = Param.Unsigned(5, "Time buffer size for backwards communication")
-    forwardComSize = Param.Unsigned(5, "Time buffer size for forward communication")
+    backComSize = Param.Unsigned(18, "Time buffer size for backwards communication")
+    forwardComSize = Param.Unsigned(18, "Time buffer size for forward communication")
 
-    LQEntries = Param.Unsigned(32, "Number of load queue entries")
-    SQEntries = Param.Unsigned(32, "Number of store queue entries")
+    LQEntries = Param.Unsigned(72, "Number of load queue entries")
+    SQEntries = Param.Unsigned(42, "Number of store queue entries")
     LSQDepCheckShift = Param.Unsigned(4, "Number of places to shift addr before check")
     LSQCheckLoads = Param.Bool(True,
         "Should dependency violations be checked for loads & stores or just stores")
@@ -112,8 +112,8 @@ class DerivO3CPU(BaseCPU):
 
     numRobs = Param.Unsigned(1, "Number of Reorder Buffers");
 
-    numPhysIntRegs = Param.Unsigned(256, "Number of physical integer registers")
-    numPhysFloatRegs = Param.Unsigned(256, "Number of physical floating point "
+    numPhysIntRegs = Param.Unsigned(168, "Number of physical integer registers")
+    numPhysFloatRegs = Param.Unsigned(168, "Number of physical floating point "
                                       "registers")
     # most ISAs don't use condition-code regs, so default is 0
     _defaultNumPhysCCRegs = 0
@@ -127,7 +127,7 @@ class DerivO3CPU(BaseCPU):
         _defaultNumPhysCCRegs = Self.numPhysIntRegs * 5
     numPhysCCRegs = Param.Unsigned(_defaultNumPhysCCRegs,
                                    "Number of physical cc registers")
-    numIQEntries = Param.Unsigned(64, "Number of instruction queue entries")
+    numIQEntries = Param.Unsigned(60, "Number of instruction queue entries")
     numROBEntries = Param.Unsigned(192, "Number of reorder buffer entries")
 
     smtNumFetchingThreads = Param.Unsigned(1, "SMT Number of Fetching Threads")
